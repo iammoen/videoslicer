@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  p Select your file
+  select(id='filename')
+    each file, i in files
+      option(value=file) #{file}
+  p Input time to start slice (in seconds)
+  input(type='number' id='timestart')
+  p Select duration of slice (in seconds)
+  input(type='number' id='duration')
+  br
+  br
+  button(id='submit') Submit
+  br
+  br
+  div(id='resultlink')
