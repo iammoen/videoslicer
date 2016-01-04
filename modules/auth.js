@@ -3,7 +3,7 @@
 var auth = require('basic-auth');
 
 var admins = {
-  'moen': { password: '8xqQZRBKvB5pGbGP' },
+  'moen': { password: '*' },
 };
 
 
