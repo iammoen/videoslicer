@@ -2,12 +2,13 @@ var Q = require('q');
 var ffmpeg = require('fluent-ffmpeg');
 var path = require('path');
 
+
 var filehandler = require('./filehandler.js');
+var config = require('./config.js');
 
 
 function slice(filename,timestart,duration) {
   var deferred = Q.defer();
-  var filepath = '/Users/moen/Movies/',
   fileExt = path.extname(filename),
   filenameNoExt = filename.substr(0, filename.lastIndexOf('.')),
   newfilename = filenameNoExt + '_' + timestart + '-' + duration + 's' + fileExt;
@@ -19,7 +20,7 @@ function slice(filename,timestart,duration) {
     } else {
       // file doesn't yet exists. Create with ffmpeg and deliver link
       var command = ffmpeg()
-        .input(filepath + filenameNoExt + fileExt)
+        .input(config.pathToOriginals + filenameNoExt + fileExt)
         .seekInput(timestart)
         .inputOptions([
           '-t ' + duration

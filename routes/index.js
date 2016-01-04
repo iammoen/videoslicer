@@ -8,9 +8,8 @@ var auth = require('basic-auth');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	var user = auth(req);
-	// => { name: 'something', pass: 'whatever' }
-	console.log(user);
+	// var user = auth(req);
+
 	filehandler.list().then(function(rsp){
 		res.render('index', { title: 'Moen Home Video Splicer', 'files': rsp.data });
 	},function(reason) {
