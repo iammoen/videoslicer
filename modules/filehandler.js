@@ -3,10 +3,12 @@ var Q = require('q');
 var config = require('./config.js');
 
 
-function list() {
-  var deferred = Q.defer();
+function list(user) {
+  var deferred = Q.defer(),
+  family = user.name,
+  whichfolder = config.pathToOriginals[family];
   
-  fs.readdir(config.pathToOriginals, function(err, files) {
+  fs.readdir(whichfolder, function(err, files) {
     if ( err ){
       deferred.reject( {'success': false, 'msg': 'error with reading folder', 'err': err } );
     }

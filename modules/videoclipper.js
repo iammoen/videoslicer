@@ -1,13 +1,14 @@
 var Q = require('q');
 var ffmpeg = require('fluent-ffmpeg');
 var path = require('path');
+var config = require('./config.js');
 
 var filehandler = require('./filehandler.js');
 
 
-function slice(filename,timestart,duration) {
+function slice(filename,timestart,duration,family) {
   var deferred = Q.defer();
-  var filepath = '/Users/moen/Movies/',
+  var filepath = config.pathToOriginals[family],
   fileExt = path.extname(filename),
   filenameNoExt = filename.substr(0, filename.lastIndexOf('.')),
   newfilename = filenameNoExt + '_' + timestart + '-' + duration + 's' + fileExt;

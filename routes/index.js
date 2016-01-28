@@ -11,8 +11,8 @@ router.get('/', function(req, res, next) {
 	var user = auth(req);
 	// => { name: 'something', pass: 'whatever' }
 	console.log(user);
-	filehandler.list().then(function(rsp){
-		res.render('index', { title: 'Moen Home Video Splicer', 'files': rsp.data });
+	filehandler.list(user).then(function(rsp){
+		res.render('index', { title: user.name.charAt(0).toUpperCase() + user.name.slice(1) + ' Home Video Splicer', 'files': rsp.data, 'family': user.name });
 	},function(reason) {
 		res.render('index', { title: 'There was an error', 'files': [] });
 	})
@@ -23,9 +23,10 @@ router.get('/', function(req, res, next) {
 router.post('/slicefile', function(req, res, next) {
 	var filename = req.body.filename,
 	timestart = req.body.timestart,
-	duration = req.body.duration;
+	duration = req.body.duration,
+    family = req.body.family;
 	
-	clip.slice( filename,timestart,duration ).then(function( rsp ) {
+	clip.slice( filename,timestart,duration,family ).then(function( rsp ) {
 		res.json(rsp);
 	}, function( reason ) {
 		res.json(reason);

@@ -6,10 +6,11 @@ block content
   select(id='filename')
     each file, i in files
       option(value=file) #{file}
-  p Input time to start slice (in seconds)
-  input(type='number' id='timestart')
-  p Select duration of slice (in seconds)
-  input(type='number' id='duration')
+  p Input time to start slice (HH:MM:SS)
+  input(type='text' id='timestartnew')
+  p Input time to stop slice (HH:MM:SS)
+  input(type='text' id='timestop')
+  input(type='text' id='family' disabled style='display:none;' value="#{family}")
   br
   br
   button(id='submit') Submit
