@@ -8,11 +8,13 @@ var auth = require('basic-auth');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+
 	var user = auth(req);
-	// => { name: 'something', pass: 'whatever' }
+
 	console.log(user);
 	filehandler.list(user).then(function(rsp){
 		res.render('index', { title: user.name.charAt(0).toUpperCase() + user.name.slice(1) + ' Home Video Splicer', 'files': rsp.data, 'family': user.name });
+        
 	},function(reason) {
 		res.render('index', { title: 'There was an error', 'files': [] });
 	})
